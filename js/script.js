@@ -1,15 +1,34 @@
 function makePage(){
-	let domande=getDomande();
+	let interviste=getInterviste();
 	let body=document.getElementById("body");
-	let i;
-	for(i=0;i<domande.length;i++){
-		let toAdd="<div class=\"intervistatore\">\n <div class=\"intervistatore interno\">\n<p id=\"domanda"+i+"\" class=\"intervistatore\">"+domande[i].Q+"</p>\n</div>\n</div>\n";
-		toAdd+= "<div class=\"intervistato\">\n <div class=\"intervistato interno\">\n<p id=\"risposta"+i+"\" class=\"intervistato\">"+domande[i].A+"</p>\n</div>\n</div>\n";
-		let text=body.innerHTML;
-		body.innerHTML=text+toAdd;
+	let content=body.innerHTML;
+	content+="<ol type=\"1\">";
+	for(handleIntervista in interviste){
+		let intervista=interviste[handleIntervista];
+		content+="<li><ol>";
+		for(nomeDomanda in intervista){
+			let domanda=intervista[nomeDomanda];
+			let i;
+			content+="<li>";
+			for(i=0;i<domanda.length;i++){
+				let interazione=domanda[i];
+				content+="<p><b>"+interazione.slice(0,15)+"</b>"+interazione.slice(15)+"</p>";
+			}
+			content+="</li>";
+		}
+		content+="</ol>";
+		content+="</li>";
 	}
-	for(i=0;i<domande.length;i++){
-		document.getElementById("domanda"+i).style="max-width:"+(document.getElementById("domanda"+i).innerHTML.length*0.85)+"ch;";
-		document.getElementById("risposta"+i).style="max-width:"+(document.getElementById("risposta"+i).innerHTML.length*0.85)+"ch;";
+	content+="</ol>";
+	body.innerHTML=content;
+}
+function switchTheme(){
+	let main=document.getElementById("body");
+	if(main.style.color=="black"){
+		main.style.color="white";
+		main.style.backgroundColor="black";
+	}else{
+		main.style.color="black";
+		main.style.backgroundColor="white";
 	}
 }
