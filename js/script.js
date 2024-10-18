@@ -12,7 +12,7 @@ function makePage(){
 			content+="<li>";
 			for(i=0;i<domanda.length;i++){
 				let interazione=domanda[i];
-				if(interazione.matcher("Intervistatore"){
+				if(interazione.matches("Intervistatore")){
 					content+="<p><b>"+interazione.slice(0,15)+"</b>"+interazione.slice(15)+"</p>";
 				}else{
 					content+="<p><b>"+interazione.slice(0,13)+"</b>"+interazione.slice(13)+"</p>";
